@@ -303,6 +303,7 @@ unsafe fn fox_ftilt(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter){
 			AttackModule::clear_all()
 		}
+}
 // Use this for general per-frame fighter-level hooks
 #[fighter_frame_callback]
 pub fn fox(fighter : &mut L2CFighterCommon) {
