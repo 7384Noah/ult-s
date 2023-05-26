@@ -287,6 +287,7 @@ unsafe fn fox_fair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
+
 #[acmd_script(
     agent = "fox",
     script =  "game_attacks3",
@@ -301,9 +302,9 @@ unsafe fn fox_ftilt(fighter: &mut L2CAgentBase) {
 
 		wait(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter){
-			AttackModule::clear_all()
+			AttackModule::clear_all(fighter.module_accessor); 
 		}
-}
+	}
 // Use this for general per-frame fighter-level hooks
 #[fighter_frame_callback]
 pub fn fox(fighter : &mut L2CFighterCommon) {
@@ -341,7 +342,7 @@ pub fn install() {
 		fox_jab1,
 		fox_jab2,
 		fox_fair,
-	        fox_ftilt
+		fox_ftilt
     );
 	smashline::install_agent_frame_callbacks!(fox);
 }
