@@ -287,7 +287,22 @@ unsafe fn fox_fair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
-		
+#[acmd_script(
+    agent = "fox",
+    script =  "game_attacks3",
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn fox_fair(fighter: &mut L2CAgentBase) {
+        let lua_state = fighter.lua_state_agent;
+		frame(fighter.lua_state_agent, 6.0);
+		if macros::is_excute(fighter) {
+			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("kneer"), /*Damage*/ 10.0, /*Angle*/ 361, /*KBG*/ 120, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 3.4, /*X*/ 4.6, /*Y*/ -0.7, /*Z*/ 0.0, /*X2*/ Some(-3.0), /*Y2*/ Some(0.0), /*Z2*/ Some(0.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
+		}
+
+		wait(fighter.lua_state_agent, 3.0);
+		if macros::is_excute(fighter){
+			AttackModule::clear_all()
+		}
 // Use this for general per-frame fighter-level hooks
 #[fighter_frame_callback]
 pub fn fox(fighter : &mut L2CFighterCommon) {
