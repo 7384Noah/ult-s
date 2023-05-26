@@ -305,55 +305,6 @@ unsafe fn banjo_dair(fighter: &mut L2CAgentBase) {
 		WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_GRAVITY_STABLE_UNABLE);
 		}
 }		
-
-#[acmd_script(
-    agent = "buddy",
-    script =  "game_specialairsdash",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn banjo_airsideb(fighter: &mut L2CAgentBase) {
-    	let lua_state = fighter.lua_state_agent;
-
-		if macros::is_excute {
-			WorkModule::on_flag(*FIGHTER_BUDDY_STATUS_SPECIAL_S_FLAG_SUPER_ARMOR)
-			JostleModule::set_status(false)
-			macros::ATTACK(fighter, 0, 0,  Hash40::new("top"), 22.0, 43, 64, 0, 66, 3.8, 0.0,4.2, 1.8, Some(0.0), Some(4.2), Some(3.2), 1.25, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 50, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_NO_FLOOR, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_BODY)
-			macros::ATTACK(fighter, 1, 0,  Hash40::new("top"), 22.0, 43, 64, 0, 66, 4.2, 0.0, 9.2, 3.8, Some(0.0), Some(9.2), Some(5.4), 1.25, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 50, 0.0, 0, false, false, false, false,true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_NO_FLOOR, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_BODY)
-			AttackModule::set_captured_same_time_attack(0, true)
-			AttackModule::set_captured_same_time_attack(1, true)
-			AttackModule::set_captured_same_time_attack_damage_mul(0, 0.25)
-			AttackModule::set_captured_same_time_attack_damage_mul(1, 0.25)
-			macros::ATK_SET_SHIELD_SETOFF_MUL_arg3(0, 1, 0.48)
-			macros::QUAKE(CAMERA_QUAKE_KIND_S)
-			macros::HIT_NO(0, HIT_STATUS_INVINCIBLE)
-			macros::HIT_NO(1, HIT_STATUS_INVINCIBLE)
-			macros::HIT_NO(2, HIT_STATUS_INVINCIBLE)
-			macros::HIT_NO(3, HIT_STATUS_INVINCIBLE)
-			macros::HIT_NO(4, HIT_STATUS_INVINCIBLE)
-			macros::HIT_NO(5, HIT_STATUS_INVINCIBLE)
-			macros::HIT_NO(6, HIT_STATUS_INVINCIBLE)
-			macros::HIT_NO(7, HIT_STATUS_INVINCIBLE)
-			macros::HIT_NO(8, HIT_STATUS_INVINCIBLE)
-			macros::HIT_NO(9, HIT_STATUS_INVINCIBLE)
-			macros::HIT_NO(10, HIT_STATUS_INVINCIBLE)
-			macros::HIT_NO(11, HIT_STATUS_NORMAL)
-			WorkModule::on_flag(*FIGHTER_BUDDY_STATUS_SPECIAL_S_FLAG_CLIFF_CHECK)
-			}
-			wait(fighter.lua_state_agent, 18.0);
-			if macros::is_excute{
-			macros::ATTACK(fighter, 0, 0,  Hash40::new("top"), 22.0, 43, 64, 0, 66, 3.8, 0.0,4.2, 1.8, Some(0.0), Some(4.2), Some(3.2), 1.25, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 50, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_NO_FLOOR, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_BODY)
-			macros::ATTACK(fighter, 1, 0,  Hash40::new("top"), 22.0, 43, 64, 0, 66, 4.2, 0.0, 9.2, 3.8, Some(0.0), Some(9.2), Some(5.4), 1.25, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 50, 0.0, 0, false, false, false, false,true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_NO_FLOOR, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_BODY)
-			AttackModule::set_captured_same_time_attack(0, true)
-			AttackModule::set_captured_same_time_attack(1, true)
-			AttackModule::set_captured_same_time_attack_damage_mul(0, 0.25)
-			AttackModule::set_captured_same_time_attack_damage_mul(1, 0.25)
-			macros::ATK_SET_SHIELD_SETOFF_MUL_arg3(0, 1, 0.28)
-			}
-		}
-
-
-
-
 #[fighter_frame( agent = FIGHTER_KIND_BUDDY )]
 fn buddy_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
@@ -394,7 +345,6 @@ pub fn install() {
 		banjo_da,
 		banjo_fthrow,
 		banjo_dair
-		banjo_airsideb
     );
     smashline::install_agent_frames!(
         buddy_frame
