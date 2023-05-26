@@ -37,7 +37,7 @@ pub fn nro_hook(info: &skyline::nro::NroInfo) {
     }
 }
 
-
+  
 #[skyline::hook(replace = change_version_string)]
 fn change_version_string_hook(arg: u64, string: *const c_char) {
 	let original_str = unsafe { skyline::from_c_str(string) };
@@ -135,7 +135,6 @@ mod wario;
 mod wiifit;
 mod wolf;
 mod younglink;
-mod yoshi; 
 mod zelda;
 
 
@@ -188,16 +187,16 @@ pub extern "C" fn main() {
 	common::install();
 	controls::install();
 	cpu::install();
-
+	
 	//Fighters
 	bayonetta::install();
 	brave::install();
 	buddy::install();
-
+	
 	captain::install();
 	chrom::install();
 	cloud::install();
-
+	
 	daisy::install();
 	dedede::install();
 	demon::install();
@@ -205,37 +204,37 @@ pub extern "C" fn main() {
 	dolly::install();
 	donkey::install();
 	duckhunt::install();
-
+	
 	edge::install();
 	element::install();
-
+	
 	falco::install();
 	fox::install();
-
+	
 	gamewatch::install();
 	ganon::install();
 	gaogaen::install();
 	gekkouga::install();
-
+	
 	ike::install();
 	inkling::install();
-
+	
 	jack::install();
-
+	
 	kamui::install();
 	ken::install();
 	kirby::install();
 	koopa::install();
 	koopajr::install();
 	krool::install();
-
+	
 	link::install();
 	littlemac::install();
 	lucario::install();
 	lucas::install();
 	lucina::install();
 	luigi::install();
-
+	
 	mario::install();
 	mariod::install();
 	marth::install();
@@ -246,7 +245,7 @@ pub extern "C" fn main() {
 	miigunner::install();
 	miiswordsman::install();
 	murabito::install();
-
+	
 	packun::install();
 	pacman::install();
 	palutena::install();
@@ -259,7 +258,7 @@ pub extern "C" fn main() {
 	popo::install();
 	ptrainer::install();
 	purin::install();
-
+	
 	reflet::install();
 	richter::install();
 	ridley::install();
@@ -268,7 +267,7 @@ pub extern "C" fn main() {
 	rosetta::install();
 	roy::install();
 	ryu::install();
-
+	
 	samus::install();
 	samusd::install();
 	sheik::install();
@@ -277,16 +276,16 @@ pub extern "C" fn main() {
 	snake::install();
 	sonic::install();
 	szerosuit::install();
-
+	
 	tantan::install();
 	toonlink::install();
 	trail::install();
-
+	
 	wario::install();
 	wiifit::install();
 	wolf::install();
-    yoshi::install(); 
+	
 	younglink::install();
-
+	
 	zelda::install();
 }
