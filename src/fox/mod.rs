@@ -292,7 +292,7 @@ unsafe fn fox_fair(fighter: &mut L2CAgentBase) {
     script =  "game_attacks3",
     category = ACMD_GAME,
 	low_priority)]
-unsafe fn fox_fair(fighter: &mut L2CAgentBase) {
+unsafe fn fox_ftilt(fighter: &mut L2CAgentBase) {
         let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -339,7 +339,8 @@ pub fn install() {
 		fox_usmash,
 		fox_jab1,
 		fox_jab2,
-		fox_fair
+		fox_fair,
+	        fox_ftilt
     );
 	smashline::install_agent_frame_callbacks!(fox);
 }
