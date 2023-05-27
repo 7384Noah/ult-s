@@ -201,8 +201,47 @@ unsafe fn diddy_nair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
-	
-		
+
+#[acmd_script(
+    agent = "diddy",
+    script =  "game_attack13",
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn diddy_jab3(fighter: &mut L2CAgentBase) {
+    	let lua_state = fighter.lua_state_agent;
+		frame(fighter.lua_state_agent, 5.0);
+		if macros::is_excute(fighter) {
+			macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 4.0, 361, 40, 0, 40, 2.6, 0.0, 6.0, 4.0, None, None, None, 2.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 1.0, 0, false, false, false, false,true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_KICK);
+			macros::ATTACK(fighter, 1, 0, Hash40::new("top"), 4.0, 361, 40, 0,40, 3.0, 0.0, 6.3, 7.5, None, None, None, 2.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 1.0, 0, false, false, false, false,true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_KICK);
+			macros::ATTACK( fighter, 2, 0, Hash40::new("top"), 4.0, 361, 40, 0, 40, 3.8, 0.0, 6.8, 12.0, None, None, None, 2.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 1.0, 0, false, false, false, false,true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_KICK);
+}
+		wait(fighter.lua_state_agent, 1.0);
+		if macros::is_excute(fighter) {
+			AttackModule::clear_all(fighter.module_accessor); 
+}
+
+}
+
+#[acmd_script(
+    agent = "diddy",
+    script =  "game_attacklw3",
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn diddy_dtilt(fighter: &mut L2CAgentBase) {
+    	let lua_state = fighter.lua_state_agent;
+		frame(fighter.lua_state_agent, 4.0);
+		if macros::is_excute(fighter) {
+			macros::ATTACK(fighter, 0, 0,Hash40::new("top"),0.5, 60, 75, 0, 15, 2.5, 0.0, 1.8, 16.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.2, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
+			macros::ATTACK(fighter, 1, 0, Hash40::new("top"), 0.5, 50, 75, 0, 15, 3.0, 0.0, 3.0, 8.5, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.2, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
+			}
+			wait(fighter.lua_state_agent, 2.0);
+		if macros::is_excute(fighter) {
+			AttackModule::clear_all(fighter.module_accessor);
+			}
+		}
+
+
+
 		
 pub fn install() {
     smashline::install_acmd_scripts!(
@@ -210,7 +249,10 @@ pub fn install() {
 		diddy_ftiltlw,
 		diddy_ftilts,
 		diddy_utilt,
-		diddy_nair
+		diddy_nair,
+		diddy_jab3,
+		diddy_dtilt
+		
     );
 	smashline::install_agent_frame_callbacks!(diddy);
 }
