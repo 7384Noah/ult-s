@@ -756,8 +756,9 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
     </struct>
     <!--IKE-->
     <struct index="32">
-      <float hash="dash_speed">1.87</float>
-      <float hash="run_speed_max">1.6</float>
+      <float hash="dash_speed">1.9</float>
+      <float hash="run_speed_max">1.65</float>
+      <float hash="air_speed_x_stable">1.155</float>
       <float hash="landing_attack_air_frame_n">10</float>
       <float hash="landing_attack_air_frame_f">11</float>
       <float hash="landing_frame">4</float>
@@ -1126,11 +1127,13 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
     <struct index="62">
       <float hash="dash_speed">1.97</float>
       <float hash="jump_speed_x_mul">1</float>
+       <float hash="jump_y">38</float>
       <float hash="weight">120</float>
       <float hash="landing_attack_air_frame_f">13</float>
       <float hash="landing_attack_air_frame_hi">11</float>
       <float hash="landing_frame">4</float>
-       <float hash="scale">2</float>
+      <float hash="scale">4</float>
+      <int hash="jump_count_max">2</int>
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
@@ -1307,11 +1310,11 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="walk_accel_add">0.5</float>
       <float hash="walk_speed_max">1.25</float>
       <float hash="ground_brake">0.075</float>
-      <float hash="run_speed_max">1.5</float>
+      <float hash="run_speed_max">1.55</float>
       <float hash="jump_speed_x_mul">1.15</float>
       <float hash="jump_aerial_y">32</float>
       <float hash="air_speed_x_stable">1.14</float>
-      <float hash="weight">97</float>
+      <float hash="weight">100</float>
       <float hash="landing_attack_air_frame_n">10</float>
       <float hash="landing_attack_air_frame_f">15</float>
       <float hash="landing_frame">4</float>
