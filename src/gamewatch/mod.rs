@@ -339,6 +339,7 @@ unsafe fn gnw_jab11(fighter: &mut L2CAgentBase) {
 	macros::ATTACK(fighter, 0, 0,Hash40::new("top"), 3.0, 361, 22, 0, 25, 3.8,0.0, 5.0, 6.0, None, None, None, 1.5, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0,false, false,false, false,true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_poison"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_OBJECT);
 	macros::ATTACK( fighter, 1, 0, Hash40::new("top"), 3.0, 180, 15, 0, 20, 4.3, 0.0, 5.2, 13.0, None, None, None, 1.5, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false,0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_FIGHTER, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_poison"), *ATTACK_SOUND_LEVEL_S,*COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_OBJECT);
 	macros::ATTACK(fighter, 2, 0, Hash40::new("top"), 3.0, 361, 15, 0, 20, 4.3, 0.0, 5.2, 13.0, None, None, None, 1.5, 1.0,*ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false,false, false, false,true,*COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL,*COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_poison"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FIRE,*ATTACK_REGION_OBJECT);
+	AttackModule::set_poison_param(fighter.module_accessor, 0, 361, 45, 1.0, false); 
 	}
 	wait(fighter.lua_state_agent, 4.0);
 	if macros::is_excute(fighter) {
