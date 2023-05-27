@@ -134,6 +134,7 @@ mod trail;
 mod wario;
 mod wiifit;
 mod wolf;
+mod yoshi; 
 mod younglink;
 mod zelda;
 
@@ -284,7 +285,7 @@ pub extern "C" fn main() {
 	wario::install();
 	wiifit::install();
 	wolf::install();
-	
+	yoshi::install(); 
 	younglink::install();
 	
 	zelda::install();
