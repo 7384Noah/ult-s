@@ -100,6 +100,7 @@ mod miifighter;
 mod miigunner;
 mod miiswordsman;
 mod murabito;
+mod ness; 
 mod packun;
 mod pacman;
 mod palutena;
@@ -246,7 +247,7 @@ pub extern "C" fn main() {
 	miigunner::install();
 	miiswordsman::install();
 	murabito::install();
-	
+	ness::install(); 
 	packun::install();
 	pacman::install();
 	palutena::install();
