@@ -1,58 +1,61 @@
-use smash::app::sv_animcmd::*;
-use smash::phx::Hash40;
 use smash::app::lua_bind::*;
 use smash::lib::lua_const::*;
 use smash::app::utility::get_kind;
 use smash::hash40;
 use smash::lua2cpp::*;
 use smashline::*;
-use smash_script::*;
-use smash::lib::{L2CValue, L2CAgent};
-use std::mem;
-use smash::app::*;
-use smash::phx::Vector3f;
-use crate::util::*;
-
+use smash_script::*;use smash::phx::Hash40;
 
 #[acmd_script(
     agent = "yoshi",
-    script = "game_attack12",
+    script =  "game_specialsloop",
     category = ACMD_GAME,
 	low_priority)]
-unsafe fn yoshi_jab2(fighter: &mut L2CAgentBase) {
+unsafe fn yoshi_sideb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-		frame(fighter.lua_state_agent, 3.0);
-		if macros::is_excute(fighter) {
-			macros::ATTACK(fighter, 0, 0, Hash40::new("top"),4.0, 361, 20, 0, 10, 3.0,0.0, 7.0, 5.0, None,None,None, 2.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 1.0, 0, false, false, false, false,true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_KICK);
-			macros::ATTACK(fighter, 1, 0, Hash40::new("top"), 4.0, 361, 20, 0, 10, 3.0, 0.0, 7.0, 8.5, None,None,None, 2.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 1.0, 0, false, false, false, false,true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_KICK);
-			macros::ATTACK(fighter, 2, 0, Hash40::new("top"), 4.0, 361, 20, 0, 10, 4.0, 0.0, 7.5, 13.3, None,None,None, 2.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 1.0, 0, false, false, false, false,true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_KICK);
-}
-	wait(fighter.lua_state_agent, 2.0);
-	if macros::is_excute(fighter) {
-		AttackModule::clear_all(fighter.module_accessor);
-}
-}
-
+    acmd!(lua_state, {
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=20.0, Angle=80, KBG=50, FKB=0, BKB=70, Size=2.3, X=0.0, Y=5.6, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=32, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_A, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_BODY)
+			ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=15.0, Angle=80, KBG=50, FKB=0, BKB=70, Size=3.5, X=0.0, Y=5.6, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=32, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_G, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_bury"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_BODY)
+			JostleModule::set_status(false)
+			}
+			
+    });
+}	
 #[acmd_script(
-    agent = "yoshi",
-    script = "game_specialsloop",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn yoshi_gloopsideb(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-		if macros::is_excute(fighter) {
-
-	macros::ATTACK(fighter, 0, 0, Hash40::new("top"),10.0, 80, 50, 0, 70, 2.3, 0.0, 5.6, 0.0, None, None, None,1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS,false, 0, 0.0, 32, false, false, false, false, true, *COLLISION_SITUATION_MASK_A, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_bury"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_BODY);
-	macros::ATTACK(fighter, 1, 0, Hash40::new("top"),10.0, 80, 50, 0, 70, 2.3, 0.0, 5.6, 0.0, None, None, None,1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS,false, 0, 0.0, 32, false, false, false, false, true, *COLLISION_SITUATION_MASK_G, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_bury"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_BODY);
-	JostleModule::set_status(fighter.module_accessor, false)
-	}
-}
+  agent = "yoshi",
+  script =  "game_attackhi3",
+  category = ACMD_GAME,
+low_priority)]
+unsafe fn yoshi_uptilt(fighter: &mut L2CAgentBase) {
+  let lua_state = fighter.lua_state_agent;
+  acmd!(lua_state, {
+    frame(Frame=1)
+    FT_MOTION_RATE(FSM=0.9)
+    frame(Frame=7)
+    FT_MOTION_RATE(FSM=1)
+    frame(Frame=8)
+    if(is_excute){
+    ATTACK(ID=0, Part=0, Bone=hash40("tail2"), Damage=7.0, Angle=100, KBG=45, FKB=0, BKB=72, Size=5.5, X=4.5, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_SLAP, Type=ATTACK_REGION_TAIL)
+    ATTACK(ID=1, Part=0, Bone=hash40("tail2"), Damage=7.0, Angle=100, KBG=45, FKB=0, BKB=72, Size=4.5, X=1.2, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_SLAP, Type=ATTACK_REGION_TAIL)
+    ATTACK(ID=2, Part=0, Bone=hash40("tail1"), Damage=7.0, Angle=100, KBG=45, FKB=0, BKB=72, Size=4.5, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_SLAP, Type=ATTACK_REGION_TAIL)
+    }
+    wait(Frames=8)
+    if(is_excute){
+    AttackModule::clear_all()
+    }
+    
+    
+    
+  });
+}	
 
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-		yoshi_jab2,
-		yoshi_gloopsideb
+		  yoshi_jab2,
+      yoshi_gloopsideb
+      
     );
-	
+	smashline::install_agent_frame_callbacks!(yoshi);
 }
