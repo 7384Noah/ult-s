@@ -270,6 +270,34 @@ pub(crate) fn check_jump(boma: &mut smash::app::BattleObjectModuleAccessor) -> b
 	}
 }
 
+#[acmd_script(
+    agent = "samus",
+    script =   "game_aircatch",
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn samus_zair(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+		if macros::is_excute(fighter) {
+	WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_AIR_LASSO_FLAG_CHECK);
+	}
+	wait(fighter.lua_state_agent, 5.0);
+	if macros::is_excute(fighter) {
+	WorkModule::off_flag(fighter.module_accessor, *FIGHTER_STATUS_AIR_LASSO_FLAG_CHECK);
+	}
+	frame(fighter.lua_state_agent, 8.0);
+	if macros::is_excute(fighter) {
+	macros::ATTACK(fighter, 0, 0, Hash40::new("throw"), 10.5, 45, 30, 0, 30, 3.0,0.0, 0.0, 0.0, None,None,None, 1.0,1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 1, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_elec"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_ENERGY);
+	}
+	frame(fighter.lua_state_agent, 16.0);
+	if macros::is_excute(fighter) {
+	macros::ATTACK(fighter, 0, 1, Hash40::new("throw"), 14.0, 45, 100, 0, 30, 5.0, 0.0, 0.0, 0.0, None,None,None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 1, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false,Hash40::new("collision_attr_elec"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_ENERGY);
+	}
+	frame(fighter.lua_state_agent, 20.0);
+	if macros::is_excute(fighter) {
+	AttackModule::clear_all(fighter.module_accessor);
+	}
+}
+
 #[fighter_frame( agent = FIGHTER_KIND_SAMUS )]
 fn samus_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
@@ -306,7 +334,8 @@ pub fn install() {
 		samus_utilt_eff,
 		samus_homing,
 		samus_super,
-		samus_shorthop_eff
+		samus_shorthop_eff,
+		samus_zair
     );
 	smashline::install_agent_frames!(samus_frame);
 }
