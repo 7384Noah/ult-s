@@ -81,15 +81,15 @@ unsafe fn plant_nair(fighter: &mut L2CAgentBase) {
 unsafe fn plant_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
-		frame(fighter.lua_state_agent, 5.0);
+		frame(fighter.lua_state_agent, 1.0);
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
-		frame(fighter.lua_state_agent, 8.0);
+		frame(fighter.lua_state_agent, 2.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1);
-		frame(fighter.lua_state_agent, 14.0);
+		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
-			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 14.5, /*Angle*/ 361, /*KBG*/ 105, /*FKB*/ 0, /*BKB*/ 23, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 4.0, /*Z*/ -10.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_B, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_BOMB);
+			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 14.5, /*Angle*/ 361, /*KBG*/ 105, /*FKB*/ 0, /*BKB*/ 23, /*Size*/ 16.0, /*X*/ 0.0, /*Y*/ 4.0, /*Z*/ -10.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_B, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_BOMB);
 		}
 		wait(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -197,6 +197,44 @@ unsafe fn plant_uair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
+
+#[acmd_script(
+    agent = "packun",
+    script =  "game_squatstepposeback",
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn plant_fsa(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+		frame(fighter.lua_state_agent, 1.0);
+	
+     WorkModule::is_flag(fighter.module_accessor, *FIGHTER_PACKUN_STATUS_SQUAT_TREAD_DAMAGE_FLAG_JUMP_MINI);
+     
+		macros::FT_MOTION_RATE(fighter, 0.55);
+		
+		frame(fighter.lua_state_agent, 2.0);
+		if macros::is_excute(fighter) {
+			macros::HIT_NODE( fighter,Hash40::new("mouth"), *HIT_STATUS_XLU);
+			macros::HIT_NODE(fighter,Hash40::new("lipu3"), *HIT_STATUS_XLU);
+			macros::HIT_NODE(fighter,Hash40::new("lipd3"), *HIT_STATUS_XLU);
+			macros::HIT_NODE(fighter,Hash40::new("neck8"), *HIT_STATUS_XLU);
+			macros::HIT_NODE(fighter,Hash40::new("neck6"), *HIT_STATUS_XLU);
+}
+		frame(fighter.lua_state_agent, 3.0);
+		if macros::is_excute(fighter) {
+			macros::ATTACK(fighter, 0, 0, Hash40::new("mouth"), 57.5, 90, 80, 0, 95, 7.0, 3.0, 0.0, 0.0, Some(7.0), Some(0.0), Some(0.0), 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL,false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_BITE); 
+		}
+		frame(fighter.lua_state_agent, 2.0);
+		macros::FT_MOTION_RATE(fighter, 1.0);
+		if macros::is_excute(fighter) {
+		AttackModule::clear_all(fighter.module_accessor);
+		macros::HIT_NODE(fighter,Hash40::new("mouth"), *HIT_STATUS_NORMAL);
+		macros::HIT_NODE(fighter,Hash40::new("lipu3"), *HIT_STATUS_NORMAL);
+		macros::HIT_NODE(fighter,Hash40::new("lipd3"), *HIT_STATUS_NORMAL);
+		macros::HIT_NODE(fighter,Hash40::new("neck8"), *HIT_STATUS_NORMAL);
+		macros::HIT_NODE(fighter,Hash40::new("neck6"), *HIT_STATUS_NORMAL);
+}
+}
+
 	
 pub fn install() {
     smashline::install_acmd_scripts!(
@@ -205,6 +243,7 @@ pub fn install() {
 		plant_bair,
 		plant_fair,
 		plant_uair,
-		plant_dair
+		plant_dair,
+		plant_fsa
     );
 }
